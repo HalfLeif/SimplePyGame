@@ -13,6 +13,7 @@ class Resources:
      self.player_img = pygame.image.load("resources/player.png")
      self.alpha_img = pygame.image.load("resources/virus2.png")
      self.delta_img = pygame.image.load("resources/delta.png")
+     self.giant_img = pygame.image.load("resources/giant.png")
      self.goal_img = pygame.image.load("resources/star.png")
 
      self.door_sound = pygame.mixer.Sound("resources/door.wav")

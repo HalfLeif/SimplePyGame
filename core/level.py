@@ -10,7 +10,6 @@ DEFEAT_BG=(106, 40, 126)
 
 START_ALPHAS=7
 GOAL_RADIUS=50
-ALPHA_RADIUS=update.ALPHA_RADIUS # TODO refactor
 
 
 def get_background(num):
@@ -73,11 +72,18 @@ class Level:
 
     num_deltas = 0
     if num_level >= 3:
-      num_deltas = num_level - 2
-    num_alphas = START_ALPHAS + 3 * (self.num_level - 1) - 2*num_deltas
+      num_deltas = (num_level // 2)
+
+    num_giants = 0
+    if num_level >= 7:
+      num_giants = (num_level // 3) - 1
+
+    total_monster = START_ALPHAS + 3 * (self.num_level - 1)
+    num_alphas = total_monster - 2*num_deltas - 3*num_giants
 
     self.alphas, self.alpha_velocities = generate_alphas(self.player, num_alphas, self.image_size, self.screen_size)
     self.deltas, self.delta_velocities = generate_alphas(self.player, num_deltas, self.image_size, self.screen_size)
+    self.giants, self.giant_velocities = generate_alphas(self.player, num_giants, self.image_size, self.screen_size)
 
     self.background = get_background(self.num_level)
 
@@ -104,9 +110,13 @@ class Level:
       background = self.background
 
     self.screen.fill(background)
-    self.draw_img(self.resources.goal_img, self.goal)
 
+    self.draw_img(self.resources.goal_img, self.goal)
     self.draw_img(self.resources.player_img, self.player)
+
+    for giant in self.giants:
+      self.draw_img(self.resources.giant_img, giant)
+
     for alpha in self.alphas:
       self.draw_img(self.resources.alpha_img, alpha)
 
@@ -114,6 +124,12 @@ class Level:
       self.draw_img(self.resources.delta_img, delta)
 
     pygame.display.flip()
+
+
+  def lose(self):
+    pygame.mixer.music.stop()
+    pygame.mixer.Sound.play(self.resources.explosion_sound)
+    self.lost = True
 
 
   def tick(self, direction):
@@ -131,7 +147,7 @@ class Level:
     self.player = update.bounds(self.player, self.image_size, self.screen_size)
 
     self.alphas, self.alpha_velocities = update.move_alphas(self.alphas, self.alpha_velocities, self.screen_size)
-
+    self.giants, self.giant_velocities = update.move_giants(self.giants, self.giant_velocities, self.screen_size)
     self.deltas, self.delta_velocities = update.move_deltas(self.deltas, self.delta_velocities, self.screen_size, self.player)
 
     if update.touches_circle(self.player, self.image_size, self.goal, GOAL_RADIUS):
@@ -139,10 +155,13 @@ class Level:
       self.won = True
 
     for alpha in (self.alphas + self.deltas):
-      if not self.won and update.touches_circle(self.player, self.image_size, alpha, ALPHA_RADIUS):
-        pygame.mixer.music.stop()
-        pygame.mixer.Sound.play(self.resources.explosion_sound)
-        self.lost = True
+      if not self.won and update.touches_circle(self.player, self.image_size, alpha, update.ALPHA_RADIUS):
+        self.lose()
+        break
+
+    for giant in self.giants:
+      if not self.won and update.touches_circle(self.player, self.image_size, giant, update.GIANT_RADIUS):
+        self.lose()
         break
 
 

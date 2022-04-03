@@ -5,8 +5,13 @@ import random
 MAX_SPEED=9
 ALPHA_MAX_SPEED=7
 DELTA_MAX_SPEED=5
-ALPHA_RADIUS=20
+GIANT_MAX_SPEED=3
 
+ALPHA_RADIUS=20
+GIANT_RADIUS=80
+
+ALPHA_ACC=0.7
+GIANT_ACC=0.1
 
 def add(pos, delta):
   x,y = pos
@@ -102,29 +107,30 @@ def check_max_speed(velocity, speed):
   return velocity
 
 
-def move_alpha(alpha, velocity, screen_size):
+def move_monsters(positions, velocities, fn):
+  new_pos = []
+  new_vs = []
+  for pos, v in zip(positions, velocities):
+    npos, nv = fn(pos, v)
+    new_pos.append(npos)
+    new_vs.append(nv)
+  return new_pos, new_vs
+
+
+def move_alpha(alpha, velocity, screen_size, monster_radius, max_speed, max_acc):
   '''Moves alpha virus, with bouncing.'''
   alpha = add(alpha, velocity)
-  velocity = check_bounce(alpha, velocity, (ALPHA_RADIUS, ALPHA_RADIUS), screen_size)
-  alpha = bounds(alpha, (ALPHA_RADIUS, ALPHA_RADIUS), screen_size)
+  velocity = check_bounce(alpha, velocity, (monster_radius, monster_radius), screen_size)
+  alpha = bounds(alpha, (monster_radius, monster_radius), screen_size)
 
   # Random acceleration
   dx = random.uniform(-1, 1)
   dy = random.uniform(-1, 1)
-  velocity = add(velocity, (dx, dy))
-  velocity = check_max_speed(velocity, ALPHA_MAX_SPEED)
+  acc = mul(normalize((dx, dy)), max_acc)
+  velocity = add(velocity, acc)
+  velocity = check_max_speed(velocity, max_speed)
 
   return alpha, velocity
-
-
-def move_alphas(alphas, alpha_velocities, screen_size):
-  new_alphas = []
-  new_vs = []
-  for alpha, velocity in zip(alphas, alpha_velocities):
-    new_pos, new_velocity = move_alpha(alpha, velocity, screen_size)
-    new_alphas.append(new_pos)
-    new_vs.append(new_velocity)
-  return new_alphas, new_vs
 
 
 def move_delta(pos, v, screen_size, target):
@@ -140,14 +146,19 @@ def move_delta(pos, v, screen_size, target):
   return pos, v
 
 
+def move_alphas(positions, velocities, screen_size):
+  return move_monsters(positions, velocities,
+      lambda p,v: move_alpha(p, v, screen_size, ALPHA_RADIUS, ALPHA_MAX_SPEED, ALPHA_ACC))
+
+
+def move_giants(positions, velocities, screen_size):
+  return move_monsters(positions, velocities,
+      lambda p,v: move_alpha(p, v, screen_size, GIANT_RADIUS, GIANT_MAX_SPEED, GIANT_ACC))
+
+
 def move_deltas(positions, velocities, screen_size, target):
-  new_pos = []
-  new_vs = []
-  for pos, v in zip(positions, velocities):
-    npos, nv = move_delta(pos, v, screen_size, target)
-    new_pos.append(npos)
-    new_vs.append(nv)
-  return new_pos, new_vs
+  return move_monsters(positions, velocities,
+      lambda p,v: move_delta(p, v, screen_size, target))
 
 
 def touches_circle(pos, image_size, circle, radius):
