@@ -14,28 +14,6 @@ ALPHA_RADIUS=update.ALPHA_RADIUS # TODO refactor
 MAX_SPEED=10
 
 
-def direction(key, speed=MAX_SPEED):
-  d = (0,0)
-  if key == pygame.K_DOWN:
-    d = (0,1)
-  if key == pygame.K_UP:
-    d = (0,-1)
-  if key == pygame.K_RIGHT:
-    d = (1,0)
-  if key == pygame.K_LEFT:
-    d = (-1,0)
-  return update.mul(d, speed)
-
-
-def reset_velocity(velocity, key):
-  vx, vy = velocity
-  if key in [pygame.K_DOWN, pygame.K_UP]:
-    vy = 0
-  if key in [pygame.K_LEFT, pygame.K_RIGHT]:
-    vx = 0
-  return (vx, vy)
-
-
 def get_background(num):
   '''Returns a background color for this level.
 
@@ -180,10 +158,5 @@ class Level:
     return math.floor(max_score * progression)
 
 
-  def reset_direction(self, key):
-    self.velocity = reset_velocity(self.velocity, key)
-
-
-  def add_direction(self, key):
-    d = direction(key)
-    self.velocity = update.add(self.velocity, d)
+  def set_direction(self, direction):
+    self.velocity = update.mul(direction, MAX_SPEED)

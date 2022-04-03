@@ -3,6 +3,20 @@ import time
 
 from core import level
 
+def get_direction(pressed):
+  dx = 0
+  dy = 0
+  if pressed[pygame.K_DOWN] or pressed[pygame.K_s]:
+    dy += 1
+  if pressed[pygame.K_UP] or pressed[pygame.K_w]:
+    dy -= 1
+  if pressed[pygame.K_RIGHT] or pressed[pygame.K_d]:
+    dx += 1
+  if pressed[pygame.K_LEFT] or pressed[pygame.K_a]:
+    dx -= 1
+  return (dx, dy)
+
+
 class Game:
   '''Runs one game instance.
 
@@ -54,6 +68,8 @@ class Game:
       if instance.won or instance.lost:
         running = False
 
+      pressed = pygame.key.get_pressed()
+      instance.set_direction(get_direction(pressed))
       instance.tick()
       instance.draw()
 
@@ -65,11 +81,9 @@ class Game:
             print('You cheated!')
             instance.won = True
             self.cheat = True
-          instance.reset_direction(event.key)
         if event.type == pygame.KEYDOWN:
           if event.key == pygame.K_ESCAPE:
             running = False
-          instance.add_direction(event.key)
 
     self.score += instance.compute_score()
     time.sleep(1)
