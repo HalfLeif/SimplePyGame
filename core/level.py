@@ -11,7 +11,6 @@ DEFEAT_BG=(106, 40, 126)
 START_ALPHAS=7
 GOAL_RADIUS=50
 ALPHA_RADIUS=update.ALPHA_RADIUS # TODO refactor
-MAX_SPEED=10
 
 
 def get_background(num):
@@ -117,13 +116,15 @@ class Level:
     pygame.display.flip()
 
 
-  def tick(self):
+  def tick(self, direction):
     '''Updates the model one iteration.
 
        Changes nothing if already won or lost.
     '''
     if self.won or self.lost:
       return
+
+    self.velocity = update.mul(direction, update.MAX_SPEED)
 
     self.survived_iterations += 1
     self.player = update.add(self.player, self.velocity)
@@ -156,7 +157,3 @@ class Level:
     k = 1e-3
     progression = 1 - math.exp(-k*self.survived_iterations)
     return math.floor(max_score * progression)
-
-
-  def set_direction(self, direction):
-    self.velocity = update.mul(direction, MAX_SPEED)

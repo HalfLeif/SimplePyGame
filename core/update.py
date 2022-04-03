@@ -2,9 +2,10 @@ import math
 import random
 
 
+MAX_SPEED=9
 ALPHA_MAX_SPEED=7
-ALPHA_RADIUS=20
 DELTA_MAX_SPEED=5
+ALPHA_RADIUS=20
 
 
 def add(pos, delta):

@@ -4,7 +4,7 @@ import time
 from core import level
 
 
-FPS=50
+FPS=40
 SEC_PER_FRAME=1/FPS
 
 
@@ -81,8 +81,7 @@ class Game:
         running = False
 
       pressed = pygame.key.get_pressed()
-      instance.set_direction(get_direction(pressed))
-      instance.tick()
+      instance.tick(get_direction(pressed))
       instance.draw()
 
       for event in pygame.event.get():
