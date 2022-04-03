@@ -47,7 +47,7 @@ def generate_alphas(player, number, image_size, screen_size):
   alphas = []
   alpha_velocities = []
   for i in range(number):
-    alphas.append(generate_position_with_distance(player, image_size, 200, screen_size))
+    alphas.append(generate_position_with_distance(player, image_size, 300, screen_size))
     alpha_velocities.append((0,0))
   return alphas, alpha_velocities
 
@@ -70,7 +70,7 @@ class Level:
     self.player = (0,0)
     self.velocity = (0,0)
 
-    self.goal = generate_position_with_distance(self.player, self.image_size, 350, self.screen_size)
+    self.goal = generate_position_with_distance(self.player, self.image_size, 450, self.screen_size)
 
     num_deltas = 0
     if num_level >= 3:

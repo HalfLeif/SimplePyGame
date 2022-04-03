@@ -3,6 +3,7 @@ import time
 
 from core import level
 
+
 def get_direction(pressed):
   dx = 0
   dy = 0
