@@ -13,6 +13,11 @@ def add(pos, delta):
   return (x+dx, y+dy)
 
 
+def negate(vec):
+  x,y = vec
+  return (-x, -y)
+
+
 def sub(pos, delta):
   return add(pos, negate(delta))
 
@@ -31,49 +36,73 @@ def normalize(vec):
   return mul(vec, 1/norm(vec))
 
 
-def negate(vec):
-  x,y = vec
-  return (-x, -y)
-
-
 def bounds(pos, image_size, screen_size):
+  '''Returns updated position after checking bounds.
+
+     - pos: center of object
+     - image_size: width and height of object
+     - screen_size: width and height of screen
+  '''
   x,y = pos
   w,h = image_size
   W,H = screen_size
-  if x < 0:
-    x = 0
-  if y < 0:
-    y = 0
-  if W < x + w:
-    x = W - w
-  if H < y + h:
-    y = H - h
+
+  left = x - w/2
+  right = x + w/2
+  top = y - h/2
+  bottom = y + h/2
+
+  if left < 0:
+    x = w/2
+  if top < 0:
+    y = h/2
+
+  if x + w/2 > W:
+    x = W - w/2
+  if y + h/2 > H:
+    y = H - h/2
+
   return (x,y)
 
 
 def check_bounce(pos, velocity, image_size, screen_size):
+  '''If object touches the wall, then bounces in opposite direction.
+     Returns new velocity.
+  '''
   x,y = pos
   w,h = image_size
   W,H = screen_size
+
+  left = x - w/2
+  right = x + w/2
+  top = y - h/2
+  bottom = y + h/2
+
   vx, vy = velocity
-  if x < 0:
+  if left < 0:
     vx = -vx
-  if y < 0:
+  if top < 0:
     vy = -vy
-  if W < x + w:
+
+  if right > W:
     vx = -vx
-  if H < y + h:
+  if bottom > H:
     vy = -vy
+
   return (vx,vy)
 
 
 def check_max_speed(velocity, speed):
+  '''If travelling faster than speed, reduces velocity to speed.
+     Returns new velocity.
+  '''
   if norm(velocity) > speed:
     return mul(normalize(velocity), speed)
   return velocity
 
 
 def move_alpha(alpha, velocity, screen_size):
+  '''Moves alpha virus, with bouncing.'''
   alpha = add(alpha, velocity)
   velocity = check_bounce(alpha, velocity, (ALPHA_RADIUS, ALPHA_RADIUS), screen_size)
   alpha = bounds(alpha, (ALPHA_RADIUS, ALPHA_RADIUS), screen_size)
@@ -98,6 +127,7 @@ def move_alphas(alphas, alpha_velocities, screen_size):
 
 
 def move_delta(pos, v, screen_size, target):
+  '''Moves delta virus, with targetting.'''
   pos = add(pos, v)
 
   # Accelerate towards target
@@ -120,5 +150,6 @@ def move_deltas(positions, velocities, screen_size, target):
 
 
 def touches_circle(pos, image_size, circle, radius):
+  '''Returns whether the object is overlapping this circle.'''
   distance = norm(sub(pos, circle))
   return distance < radius + 0.5*image_size[1]

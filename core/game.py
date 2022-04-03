@@ -17,6 +17,7 @@ class Game:
 
 
   def run(self):
+    '''Runs one game, with many levels.'''
     alive = True
     num_level = 0
     while alive:
@@ -26,12 +27,12 @@ class Game:
 
 
   def play_music(self, num_level):
+    '''Changes music track every N levels.'''
     change_each = 5
     if (num_level % 5 != 1):
       # continue with previous music without changing
       return
     track = (num_level // 5) % len(self.resources.music)
-    # pygame.mixer.music.stop()
     pygame.mixer.music.load(self.resources.music[track])
     pygame.mixer.music.play()
 

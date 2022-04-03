@@ -84,14 +84,18 @@ class Level:
     self.velocity = (0,0)
 
     self.goal = generate_position_with_distance(self.player, self.image_size, 350, self.screen_size)
+
     num_deltas = 0
     if num_level >= 3:
       num_deltas = num_level - 2
     num_alphas = START_ALPHAS + 3 * (self.num_level - 1) - 2*num_deltas
+
     self.alphas, self.alpha_velocities = generate_alphas(self.player, num_alphas, self.image_size, self.screen_size)
+    self.deltas, self.delta_velocities = generate_alphas(self.player, num_deltas, self.image_size, self.screen_size)
+
     self.background = get_background(self.num_level)
 
-    self.delta_alphas, self.delta_velocities = generate_alphas(self.player, num_deltas, self.image_size, self.screen_size)
+
 
 
   def draw_img(self, img, center_pos):
@@ -117,7 +121,7 @@ class Level:
     for alpha in self.alphas:
       self.draw_img(self.resources.alpha_img, alpha)
 
-    for delta in self.delta_alphas:
+    for delta in self.deltas:
       self.draw_img(self.resources.delta_img, delta)
 
     pygame.display.flip()
@@ -134,15 +138,16 @@ class Level:
     self.survived_iterations += 1
     self.player = update.add(self.player, self.velocity)
     self.player = update.bounds(self.player, self.image_size, self.screen_size)
+
     self.alphas, self.alpha_velocities = update.move_alphas(self.alphas, self.alpha_velocities, self.screen_size)
 
-    self.delta_alphas, self.delta_velocities = update.move_deltas(self.delta_alphas, self.delta_velocities, self.screen_size, self.player)
+    self.deltas, self.delta_velocities = update.move_deltas(self.deltas, self.delta_velocities, self.screen_size, self.player)
 
     if update.touches_circle(self.player, self.image_size, self.goal, GOAL_RADIUS):
       pygame.mixer.Sound.play(self.resources.door_sound)
       self.won = True
 
-    for alpha in (self.alphas + self.delta_alphas):
+    for alpha in (self.alphas + self.deltas):
       if not self.won and update.touches_circle(self.player, self.image_size, alpha, ALPHA_RADIUS):
         pygame.mixer.music.stop()
         pygame.mixer.Sound.play(self.resources.explosion_sound)

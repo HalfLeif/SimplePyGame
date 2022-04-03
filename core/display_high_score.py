@@ -4,9 +4,8 @@ from enum import Enum
 from core import score
 
 
-white = (255, 255, 255)
-green = (0, 255, 0)
-blue = (0, 0, 128)
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 128)
 
 
 class Alignment(Enum):
@@ -25,7 +24,7 @@ class TextArea:
 
   def add_text(self, text_string, fsize, align=Alignment.CENTER, offset=0):
     font = pygame.font.Font('freesansbold.ttf', fsize)
-    text = font.render(text_string, True, white, blue)
+    text = font.render(text_string, True, WHITE, BLUE)
 
     self.y += 0.5*fsize
     textRect = text.get_rect()
@@ -45,7 +44,6 @@ class TextArea:
   def add_row(self, fields, fsize, offset=0):
     '''Aligns each column on RIGHT.'''
     y = self.y
-    # middle = self.screen_size[0] // 2
     right = offset
     # Referencing other rects for distancing easily produces bad results, since
     # prevous rect size differs depending on its content. For now hardcode
@@ -67,8 +65,8 @@ class TextArea:
 
   def draw(self):
     box = self.bounding_box()
-    pygame.draw.rect(self.screen, blue, box)
-    pygame.draw.rect(self.screen, white, box, width=2)
+    pygame.draw.rect(self.screen, BLUE, box)
+    pygame.draw.rect(self.screen, WHITE, box, width=2)
     for (text, textRect) in self.rects:
       self.screen.blit(text, textRect)
     pygame.display.update()
