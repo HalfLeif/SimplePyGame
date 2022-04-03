@@ -4,7 +4,7 @@ import pygame
 
 from core import update
 
-BACKGROUND=(40, 110, 150)
+
 VICTORY_BG=(0xff, 0xd3, 0x00)
 DEFEAT_BG=(106, 40, 126)
 
@@ -15,15 +15,16 @@ MAX_SPEED=10
 
 
 def direction(key, speed=MAX_SPEED):
+  d = (0,0)
   if key == pygame.K_DOWN:
-    return (0,speed)
+    d = (0,1)
   if key == pygame.K_UP:
-    return (0,0-speed)
+    d = (0,-1)
   if key == pygame.K_RIGHT:
-    return (speed,0)
+    d = (1,0)
   if key == pygame.K_LEFT:
-    return (0-speed,0)
-  return (0,0)
+    d = (-1,0)
+  return update.mul(d, speed)
 
 
 def reset_velocity(velocity, key):
@@ -36,14 +37,20 @@ def reset_velocity(velocity, key):
 
 
 def get_background(num):
+  '''Returns a background color for this level.
+
+     Picks a color randomly within the specified color range.
+  '''
   min = [30, 100, 160]
   max = [85, 240, 255]
-  def update_color(i, c):
-    return random.randrange(min[i], max[i])
-  return [update_color(i,c) for (i,c) in enumerate(BACKGROUND)]
+  color = []
+  for i in range(3):
+    color.append(random.randrange(min[i], max[i]))
+  return color
 
 
 def generate_position(screen_size):
+  '''Generate any random position.'''
   max_x, max_y = screen_size
   x = random.uniform(0, max_x)
   y = random.uniform(0, max_y)
@@ -51,6 +58,7 @@ def generate_position(screen_size):
 
 
 def generate_position_with_distance(player, image_size, distance, screen_size):
+  '''Generate position at least distance away from player.'''
   pos = generate_position(screen_size)
   while update.touches_circle(player, image_size, pos, distance):
     pos = generate_position(screen_size)
@@ -67,6 +75,7 @@ def generate_alphas(player, number, image_size, screen_size):
 
 
 class Level:
+  '''Tracks all objects for one level of the game.'''
 
   def __init__(self, num_level, screen, resources):
     self.num_level = num_level
@@ -96,9 +105,12 @@ class Level:
     self.background = get_background(self.num_level)
 
 
-
-
   def draw_img(self, img, center_pos):
+    '''Draws image on screen.
+
+       center_pos is the middle of the object.
+       Calculates top left corner for drawing.
+    '''
     w = img.get_width()
     h = img.get_height()
     (x,y) = center_pos
@@ -106,7 +118,7 @@ class Level:
 
 
   def draw(self):
-    '''Draws the current state.'''
+    '''Draws the current game state.'''
     if self.won:
       background = VICTORY_BG
     elif self.lost:
@@ -130,7 +142,7 @@ class Level:
   def tick(self):
     '''Updates the model one iteration.
 
-       If already won or lost, changes nothing.
+       Changes nothing if already won or lost.
     '''
     if self.won or self.lost:
       return
