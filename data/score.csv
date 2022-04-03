@@ -74,6 +74,7 @@ gabriel,6,15657
 ItchyWitch,6,15624
 malmy2,6,15614
 ItchyWitch,6,15603
+dev,6,15603
 ItchyWitch,6,15598
 emmy,6,15598
 sofia,6,15581
@@ -310,6 +311,7 @@ dev,4,6102
 malmy2,4,6102
 emmy,4,6083
 dev,4,6071
+dev,4,6043
 anna,3,3956
 mia,3,3898
 ItchyWitch,3,3892
@@ -472,6 +474,7 @@ dev,3,3068
 malmy,3,3062
 HalfLeif,3,3053
 dev,3,3029
+dev,3,3029
 dev,2,1796
 ItchyWitch,2,1567
 ItchyWitch,2,1531
@@ -507,6 +510,7 @@ malmy2,2,1341
 ItchyWitch,2,1336
 ItchyWitch,2,1336
 emmy,2,1336
+dev,2,1336
 ItchyWitch,2,1332
 ItchyWitch,2,1327
 HalfLeif,2,1321
@@ -615,6 +619,7 @@ HalfLeif,2,1061
 Sis B,2,1059
 dev,2,1045
 sofia,2,1039
+dev,2,1037
 HalfLeif,2,1033
 ItchyWitch,2,1029
 ItchyWitch,1,623
@@ -654,9 +659,11 @@ malmy2,1,152
 malmy,1,143
 gabriel,1,140
 gabriel,1,128
+dev,1,128
 malmy2,1,124
 gabriel,1,122
 gabriel,1,118
+dev,1,114
 malmy2,1,112
 emmy,1,111
 mia,1,106
@@ -675,5 +682,6 @@ Mary,1,44
 malmy,1,44
 emmy,1,43
 dev,1,39
+dev,1,38
 emmy,1,37
 emmy,1,35

@@ -4,6 +4,10 @@ import time
 from core import level
 
 
+FPS=50
+SEC_PER_FRAME=1/FPS
+
+
 def get_direction(pressed):
   dx = 0
   dy = 0
@@ -62,10 +66,17 @@ class Game:
     self.play_music(num_level)
 
     running = True
+    t = time.time()
     while running:
       # 50 fps = 1/50 sec = 20 ms
       # Sleep for 20 ms
-      time.sleep(0.020)
+      time_spent = time.time() - t
+      if time_spent < SEC_PER_FRAME:
+        # Only sleep until the next tick.
+        # This keeps FPS relatively stable, although sleep time is not exact.
+        time.sleep(SEC_PER_FRAME - time_spent)
+      t = time.time()
+
       if instance.won or instance.lost:
         running = False
 
