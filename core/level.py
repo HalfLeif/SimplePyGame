@@ -75,8 +75,8 @@ class Level:
       num_deltas = (num_level // 2)
 
     num_giants = 0
-    if num_level >= 7:
-      num_giants = (num_level // 3) - 1
+    if num_level >= 5:
+      num_giants = (num_level // 3)
 
     total_monster = START_ALPHAS + 3 * (self.num_level - 1)
     num_alphas = total_monster - 2*num_deltas - 3*num_giants

@@ -1,5 +1,6 @@
 dev,13,79260
 dev,13,78695
+HalfLeif,12,67228
 dev,12,66977
 HalfLeif,11,55966
 dev,11,55692
@@ -61,6 +62,7 @@ ItchyWitch,6,16438
 ItchyWitch,6,16401
 malmy,6,16359
 emmy,6,16313
+ItchyWitch,6,16294
 ItchyWitch,6,16189
 ItchyWitch,6,16107
 ItchyWitch,6,16038
@@ -95,9 +97,11 @@ ItchyWitch,6,15461
 ItchyWitch,6,15444
 ItchyWitch,6,15427
 ItchyWitch,6,15400
+ItchyWitch,6,15383
 ItchyWitch,6,15377
 ItchyWitch,6,15371
 HalfLeif,6,15343
+ItchyWitch,6,15321
 ItchyWitch,6,15315
 gabriel,6,15304
 ItchyWitch,6,15286
@@ -134,8 +138,10 @@ ItchyWitch,5,10578
 ItchyWitch,5,10578
 ItchyWitch,5,10560
 emmy,5,10556
+ItchyWitch,5,10556
 ItchyWitch,5,10547
 malmy,5,10543
+ItchyWitch,5,10538
 ItchyWitch,5,10538
 malmy,5,10529
 ItchyWitch,5,10525
@@ -209,6 +215,7 @@ ItchyWitch,4,6815
 ItchyWitch,4,6809
 ItchyWitch,4,6793
 sofia,4,6780
+ItchyWitch,4,6777
 ItchyWitch,4,6773
 ItchyWitch,4,6764
 ItchyWitch,4,6744
@@ -276,6 +283,7 @@ ItchyWitch,4,6384
 ItchyWitch,4,6384
 ItchyWitch,4,6380
 malmy2,4,6377
+ItchyWitch,4,6373
 ItchyWitch,4,6369
 ItchyWitch,4,6369
 dev,4,6369
@@ -332,6 +340,7 @@ ItchyWitch,3,3808
 ItchyWitch,3,3793
 Kris,3,3775
 -mia,3,3775
+ItchyWitch,3,3775
 ItchyWitch,3,3752
 HalfLeif,3,3752
 ItchyWitch,3,3750
@@ -344,6 +353,7 @@ ItchyWitch,3,3616
 ItchyWitch,3,3609
 ItchyWitch,3,3609
 ItchyWitch,3,3602
+ItchyWitch,3,3594
 ItchyWitch,3,3594
 malmy2,3,3573
 ItchyWitch,3,3570
@@ -361,6 +371,7 @@ ItchyWitch,3,3524
 gabriel,3,3516
 ItchyWitch,3,3514
 malmy2,3,3511
+ItchyWitch,3,3509
 ItchyWitch,3,3491
 ItchyWitch,3,3486
 ItchyWitch,3,3484
@@ -368,6 +379,7 @@ mia,3,3481
 ItchyWitch,3,3479
 ItchyWitch,3,3474
 ItchyWitch,3,3471
+ItchyWitch,3,3469
 malmy2,3,3466
 ItchyWitch,3,3461
 ItchyWitch,3,3456
@@ -393,6 +405,7 @@ ItchyWitch,3,3391
 gabriel,3,3389
 ItchyWitch,3,3386
 malmy2,3,3386
+ItchyWitch,3,3386
 emmy,3,3381
 malmy2,3,3365
 ItchyWitch,3,3363
@@ -411,6 +424,7 @@ emmy,3,3341
 ItchyWitch,3,3328
 malmy,3,3325
 malmy2,3,3325
+ItchyWitch,3,3323
 ItchyWitch,3,3315
 dev,3,3309
 ItchyWitch,3,3307
@@ -424,7 +438,9 @@ ItchyWitch,3,3285
 gabriel,3,3285
 ItchyWitch,3,3282
 ItchyWitch,3,3280
+ItchyWitch,3,3280
 ItchyWitch,3,3274
+ItchyWitch,3,3271
 ItchyWitch,3,3271
 ItchyWitch,3,3269
 ItchyWitch,3,3266
@@ -439,6 +455,7 @@ ItchyWitch,3,3255
 ItchyWitch,3,3249
 ItchyWitch,3,3247
 ItchyWitch,3,3244
+ItchyWitch,3,3241
 dev,3,3238
 ItchyWitch,3,3233
 malmy2,3,3222
@@ -493,6 +510,7 @@ ItchyWitch,2,1531
 ItchyWitch,2,1512
 dev,2,1503
 gabriel,2,1483
+ItchyWitch,2,1479
 ItchyWitch,2,1470
 ItchyWitch,2,1450
 dev,2,1440
@@ -503,6 +521,7 @@ ItchyWitch,2,1433
 ItchyWitch,2,1422
 ItchyWitch,2,1409
 malmy,2,1404
+ItchyWitch,2,1401
 ItchyWitch,2,1399
 ItchyWitch,2,1385
 ItchyWitch,2,1382
@@ -536,6 +555,7 @@ malmy2,2,1302
 ItchyWitch,2,1297
 malmy2,2,1297
 ItchyWitch,2,1295
+ItchyWitch,2,1295
 ItchyWitch,2,1282
 ItchyWitch,2,1280
 emmy,2,1280
@@ -543,6 +563,7 @@ ItchyWitch,2,1276
 ItchyWitch,2,1275
 emmy,2,1275
 ItchyWitch,2,1271
+ItchyWitch,2,1268
 ItchyWitch,2,1264
 ItchyWitch,2,1264
 ItchyWitch,2,1263
@@ -575,6 +596,7 @@ ItchyWitch,2,1192
 ItchyWitch,2,1188
 ItchyWitch,2,1184
 malmy2,2,1181
+ItchyWitch,2,1181
 emmy,2,1179
 malmy,2,1179
 emmy,2,1177
@@ -654,6 +676,7 @@ gabriel,1,231
 dev,1,228
 ItchyWitch,1,225
 -mia,1,214
+ItchyWitch,1,214
 ItchyWitch,1,212
 ItchyWitch,1,208
 ItchyWitch,1,197
@@ -688,6 +711,7 @@ gabriel,1,128
 dev,1,128
 malmy2,1,124
 gabriel,1,122
+ItchyWitch,1,120
 gabriel,1,118
 dev,1,114
 dev,1,113
