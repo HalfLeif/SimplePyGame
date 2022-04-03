@@ -22,9 +22,9 @@ class Resources:
        # Doesn't work because unsupported format...
        # "resources/edtijo__happy-8bit-pixel-adenture.wav",
        "resources/edwardszakal__game-music.mp3",
-       "resources/michorvath__rivalry-8-bit-music-loop.wav",
      ]
      self.sad_music = 'resources/toivo161__melancholic-piano-ballad.wav'
+     self.happy_end_music = 'resources/michorvath__rivalry-8-bit-music-loop.wav'
 
 
 class ExitCode(Enum):

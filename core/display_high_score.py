@@ -73,7 +73,10 @@ class TextArea:
 
 
 def high_score_screen(screen, score, resources):
-  pygame.mixer.music.load(resources.sad_music)
+  if score.last[1] >= 7:
+    pygame.mixer.music.load(resources.happy_end_music)
+  else:
+    pygame.mixer.music.load(resources.sad_music)
   pygame.mixer.music.play()
 
   area = TextArea(screen, 200)
