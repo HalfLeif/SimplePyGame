@@ -42,6 +42,10 @@ def normalize(vec):
   return mul(vec, 1/norm(vec))
 
 
+# assert norm(normalize((3,4))) == 1
+# assert norm(mul(normalize((3,4)), 2)) == 2
+
+
 def bounds(pos, image_size, screen_size):
   '''Returns updated position after checking bounds.
 
