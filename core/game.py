@@ -66,10 +66,9 @@ class Game:
     self.play_music(num_level)
 
     running = True
+    santa = True
     t = time.time()
     while running:
-      # 50 fps = 1/50 sec = 20 ms
-      # Sleep for 20 ms
       time_spent = time.time() - t
       if time_spent < SEC_PER_FRAME:
         # Only sleep until the next tick.
@@ -81,8 +80,9 @@ class Game:
         running = False
 
       pressed = pygame.key.get_pressed()
-      instance.tick(get_direction(pressed))
-      instance.draw()
+      if santa:
+        instance.tick(get_direction(pressed))
+      instance.draw(santa)
 
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -93,6 +93,14 @@ class Game:
             instance.won = True
             self.cheat = True
         if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_SPACE:
+            if santa:
+              print('Currenlty play, start pause')
+              santa = False
+            else:
+              print('Currenlty pause, start play')
+              santa = True
+
           if event.key == pygame.K_ESCAPE:
             running = False
 

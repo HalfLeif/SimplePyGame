@@ -100,7 +100,7 @@ class Level:
     self.screen.blit(img, (x - w/2, y - h/2))
 
 
-  def draw(self):
+  def draw(self, playing):
     '''Draws the current game state.'''
     if self.won:
       background = VICTORY_BG
@@ -122,6 +122,10 @@ class Level:
 
     for delta in self.deltas:
       self.draw_img(self.resources.delta_img, delta)
+
+    if not playing:
+      box = pygame.Rect(50, 50, 500, 250)
+      pygame.draw.rect(self.screen, (0,0,0), box)
 
     pygame.display.flip()
 
